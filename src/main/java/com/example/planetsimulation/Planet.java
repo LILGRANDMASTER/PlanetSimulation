@@ -1,6 +1,7 @@
 package com.example.planetsimulation;
 
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -10,13 +11,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
 public class Planet extends Pane {
     private Circle object;
     private double mass;
     private Vec2 pos; //текущая позиция
     private Vec2 velocity;
-    public Vec2 acceleration; //ускорение
-    public static Stage menuWindow = new Stage();
+    private Vec2 acceleration; //ускорение
+    private static Stage menuWindow = new Stage();
+
+    private Scene menu;
 
 
     public Planet(double R, double mass, Vec2 pos){
@@ -52,6 +56,12 @@ public class Planet extends Pane {
         getChildren().addAll(object);
 
         setOnMouseClicked(openMenu());
+    }
+
+    private void makeMenu() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Planet.class.getResource("planet-menu.fxml"));
+        menu = new Scene(loader.load());
+
     }
 
     public void move(){
@@ -95,10 +105,17 @@ public class Planet extends Pane {
 
 
     public EventHandler<MouseEvent> openMenu(){
+        try{
+            makeMenu();
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+
         return new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event){
-               menuWindow.show();
+                menuWindow.setScene(menu);
+                menuWindow.show();
             }
         };
     }

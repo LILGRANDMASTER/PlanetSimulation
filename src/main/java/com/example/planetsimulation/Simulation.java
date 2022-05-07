@@ -21,7 +21,7 @@ public class Simulation extends Application {
     private static ArrayList<Planet> planets = new ArrayList<>();
 
     public Parent createStartSystem(){
-        Planet planet = new Planet(10, 1000, new Vec2(400,400));
+        Planet planet = new Planet(10, 100, new Vec2(400,400));
         planets.add(planet);
         gameRoot.getChildren().addAll(planet);
         gameRoot.setPrefSize(800,800);
@@ -62,7 +62,7 @@ public class Simulation extends Application {
                Vec2 duration = Vec2.normolize(Vec2.vectorDifference(p2.getPos(), p1.getPos()));
 
                //вычисляем модуль вектора ускорения
-                double module = p2.getMass()/Math.pow(p1.calculateDistance(p2),2);
+                double module = 10*p2.getMass()/Math.pow(p1.calculateDistance(p2),2);
 
                 //Прибавляем к результирующему вектору ускорения
                 if(p1.calculateDistance(p2) <= 20)
