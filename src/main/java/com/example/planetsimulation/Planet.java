@@ -1,8 +1,12 @@
 package com.example.planetsimulation;
 
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -14,13 +18,13 @@ import java.io.IOException;
 
 public class Planet extends Pane {
     private Circle object;
-    private double mass;
+    public double mass;
     private Vec2 pos; //текущая позиция
     private Vec2 velocity;
     private Vec2 acceleration; //ускорение
     private static Stage menuWindow = new Stage();
-
     private Scene menu;
+    private Planet pl = this;
 
 
     public Planet(double R, double mass, Vec2 pos){
@@ -73,6 +77,12 @@ public class Planet extends Pane {
         setTranslateY(pos.y());
     }
 
+    public void setParameters(double R, double mass, Color color){
+        object.setRadius(R);
+        this.mass = mass;
+        object.setFill(color);
+    }
+
     public double getMass(){
         return mass;
     }
@@ -88,6 +98,7 @@ public class Planet extends Pane {
     public void setAcceleration(Vec2 acceleration){
         this.acceleration = acceleration;
     }
+
     //Расстояние до планеты p
     public double calculateDistance(Planet p){
         Vec2 pos1 = this.getPos();
@@ -111,12 +122,35 @@ public class Planet extends Pane {
             System.out.println(e.getMessage());
         }
 
+
+
         return new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event){
+
+                MenuController.planet = pl;
                 menuWindow.setScene(menu);
                 menuWindow.show();
             }
         };
     }
+
+
+
+    /*//================FXML MENU CONTROLLS=====================
+    @FXML
+    private ChoiceBox<Color> planetColor;
+    @FXML
+    private Slider planetRadius;
+    @FXML
+    private TextField planetMass;
+
+
+    @FXML
+    protected void onAcceptButtonClicked() {
+        object.setFill(planetColor.getValue());
+        mass = Double.parseDouble(planetMass.getText());
+        object.setRadius(planetRadius.getValue());
+    }
+    */
 }

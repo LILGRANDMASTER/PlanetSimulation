@@ -22,6 +22,7 @@ public class Simulation extends Application {
 
     public Parent createStartSystem(){
         Planet planet = new Planet(10, 100, new Vec2(400,400));
+        System.out.println(planet);
         planets.add(planet);
         gameRoot.getChildren().addAll(planet);
         gameRoot.setPrefSize(800,800);
@@ -65,7 +66,7 @@ public class Simulation extends Application {
                 double module = 10*p2.getMass()/Math.pow(p1.calculateDistance(p2),2);
 
                 //Прибавляем к результирующему вектору ускорения
-                if(p1.calculateDistance(p2) <= 20)
+                if(p1.calculateDistance(p2) <= (p1.getRadius()+p2.getRadius()))
                     newAcceleration.add(duration.mul(-module));
                 else
                     newAcceleration.add(duration.mul(module));
@@ -77,6 +78,7 @@ public class Simulation extends Application {
 
         //Двигаем планеты
         for(Planet p : planets){
+            System.out.println(p.mass);
             p.move();
         }
     }
