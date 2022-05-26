@@ -4,31 +4,52 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static com.example.planetsimulation.Vec2.vectorDifference;
+import static javafx.scene.layout.BackgroundPosition.CENTER;
+import static javafx.scene.layout.BackgroundRepeat.NO_REPEAT;
+import static javafx.scene.layout.BackgroundRepeat.REPEAT;
+import static javafx.scene.layout.BackgroundSize.DEFAULT;
 
 public class Simulation extends Application {
     private static Pane gameRoot = new Pane();
-    private static Pane applicationRoot = new Pane();
+    private static Group applicationRoot = new Group();
     private static ArrayList<Planet> planets = new ArrayList<>();
+    private static final String BACKGROUND_PATH = "";
+    private static boolean isPaused = false;
 
     public Parent createStartSystem(){
+        //создаем и добавляем начальную планету
         Planet planet = new Planet(10, 100, new Vec2(400,400));
         System.out.println(planet);
         planets.add(planet);
         gameRoot.getChildren().addAll(planet);
+
+        //настраиваем размер и устанавливаем задний фон
         gameRoot.setPrefSize(800,800);
+
+
         applicationRoot.getChildren().addAll(gameRoot);
         return applicationRoot;
     }
+
 
     //Обработчик добавляющий новую планету
     public EventHandler<MouseEvent> addPlanet(){
@@ -86,8 +107,9 @@ public class Simulation extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Scene scene = new Scene(createStartSystem());
+        Scene scene = new Scene(createStartSystem(),800,800);
         scene.setOnMouseClicked(addPlanet());
+
 
 
         stage.setScene(scene);
@@ -99,6 +121,26 @@ public class Simulation extends Application {
             }
         };
         timer.start();
+
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+               String key = keyEvent.getText();
+
+               if(key.equals(" ")){
+
+                   if(isPaused) {
+                       timer.start();
+                       isPaused = false;
+                   } else{
+                       timer.stop();
+                       isPaused = true;
+                   }
+               }
+            }
+        });
+
+
     }
 
     public static void main(String[] args) {

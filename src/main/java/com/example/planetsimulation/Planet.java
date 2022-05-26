@@ -83,6 +83,22 @@ public class Planet extends Pane {
         object.setFill(color);
     }
 
+    public void setColor(String color){
+        switch(color){
+            case "RED":     object.setFill(Color.RED);
+                            break;
+
+            case "GREEN":   object.setFill(Color.GREEN);
+                            break;
+
+            case "YELLOW":  object.setFill(Color.YELLOW);
+                            break;
+
+            case "BLUE":    object.setFill(Color.BLUE);
+                            break;
+        }
+    }
+
     public double getMass(){
         return mass;
     }
@@ -97,6 +113,10 @@ public class Planet extends Pane {
 
     public void setAcceleration(Vec2 acceleration){
         this.acceleration = acceleration;
+    }
+
+    public void setRadius(double R){
+        object.setRadius(R);
     }
 
     //Расстояние до планеты p

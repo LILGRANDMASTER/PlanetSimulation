@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="509.0" prefWidth="331.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.planetsimulation.MenuController">
+<AnchorPane prefHeight="509.0" prefWidth="331.0" style="-fx-background-color: #191970;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.planetsimulation.MenuController">
    <children>
       <GridPane alignment="CENTER" layoutX="28.0" layoutY="66.0" prefHeight="366.0" prefWidth="274.0">
         <columnConstraints>
@@ -25,27 +25,27 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="146.0" text="Цвет:">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="146.0" text="Цвет:" textFill="#f7f2f2">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
             <ChoiceBox fx:id="planetColor" prefHeight="26.0" prefWidth="140.0" GridPane.columnIndex="1" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="149.0" text="Радиус:" GridPane.rowIndex="1">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="149.0" text="Радиус:" textFill="#f7f7f7" GridPane.rowIndex="1">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" prefHeight="26.0" prefWidth="151.0" text="Масса:" GridPane.rowIndex="2">
+            <Label alignment="CENTER" prefHeight="26.0" prefWidth="151.0" text="Масса:" textFill="#faf7f7" GridPane.rowIndex="2">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
             <TextField fx:id="planetMass" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Slider fx:id="planetRadius" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Slider fx:id="planetRadius" blockIncrement="5.0" min="10.0" showTickLabels="true" showTickMarks="true" value="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Label layoutX="91.0" layoutY="24.0" prefHeight="26.0" prefWidth="152.0" text="Параметры планеты">
+      <Label layoutX="91.0" layoutY="24.0" prefHeight="26.0" prefWidth="152.0" text="Параметры планеты" textFill="#faf5f5">
          <font>
             <Font size="16.0" />
          </font>
